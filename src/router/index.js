@@ -49,9 +49,15 @@ const routes = [
     component: About
   },
   {
-    path: '/:catchAll(.*)', //catches all routs that don't match any of existing
+    path: '/:catchAll(.*)', //catches all routs that don't match any of existing (1st level)
     name: 'NotFound',
     component: NotFound
+  },
+  {
+    path: '/404/:resource',
+    name: '404Resource',
+    component: NotFound,
+    props: true
   }
 ]
 
