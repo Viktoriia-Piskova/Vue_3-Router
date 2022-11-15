@@ -12,18 +12,14 @@ export default {
       unsavedChanges: true
     }
   },
-  beforeRouteLeave(routeTo, routeFrom, next) {
+  beforeRouteLeave() {
     if (this.unsavedChanges) {
       const answer = window.confirm(
         'Do you really want to leave? You have unsaved changes'
       )
-      if (answer) {
-        next()
-      } else {
-        next(false)
+      if (!answer) {
+        return false
       }
-    } else {
-      next()
     }
   }
 }
