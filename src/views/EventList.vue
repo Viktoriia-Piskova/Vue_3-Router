@@ -24,7 +24,6 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 import EventService from '@/services/EventService.js'
-import NProgress from 'nprogress'
 
 export default {
   name: 'EventList',
@@ -39,7 +38,6 @@ export default {
     }
   },
   beforeRouteEnter(routeTo, routeFrom, next) {
-    NProgress.start()
     EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
       .then(response => {
         next(comp => {
@@ -50,12 +48,8 @@ export default {
       .catch(() => {
         next({ name: 'NetworkError' })
       })
-      .finally(() => {
-        NProgress.done()
-      })
   },
   beforeRouteUpdate(routeTo) {
-    NProgress.start()
     EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
       .then(response => {
         this.events = response.data
@@ -63,9 +57,6 @@ export default {
       })
       .catch(() => {
         return { name: 'NetworkError' }
-      })
-      .finally(() => {
-        NProgress.done()
       })
   },
 
