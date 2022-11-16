@@ -38,7 +38,7 @@ export default {
     }
   },
   beforeRouteEnter(routeTo, routeFrom, next) {
-    return EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
       .then(response => {
         next(comp => {
           comp.events = response.data
@@ -50,7 +50,7 @@ export default {
       })
   },
   beforeRouteUpdate(routeTo) {
-    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+    return EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
       .then(response => {
         this.events = response.data
         this.totalEvents = response.headers['x-total-count']
