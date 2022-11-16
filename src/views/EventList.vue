@@ -38,7 +38,7 @@ export default {
     }
   },
   beforeRouteEnter(routeTo, routeFrom, next) {
-    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+    return EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
       .then(response => {
         next(comp => {
           comp.events = response.data
